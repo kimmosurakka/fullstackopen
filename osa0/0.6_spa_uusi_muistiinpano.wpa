@@ -1,0 +1,26 @@
+title Single Page App - New Note
+
+actor käyttäjä
+
+
+
+käyttäjä->selain: write new note
+käyttäjä->selain: click "send"
+
+note over selain:
+selain suorittaa form.onSubmit
+-käsittelijän, joka:
+- lisää muistiinpanon listaan "notes"
+- renderöi muistiinpanot näytölle
+- lähettää uuden muistiipanon palvelimelle
+end note 
+
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over palvelin:
+palvelin tallettaa lisätyn muistiinpanon
+tietokantaan
+end note
+
+palvelin-->selain: 201 Created
+
