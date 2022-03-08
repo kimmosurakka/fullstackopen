@@ -35,13 +35,18 @@ const App = () => {
     setVotes(newVotes)
   }
 
+  const chosen = votes.indexOf(Math.max(...votes))
+
   return (
     <div>
+      <h1>Anecdote of the Day</h1>
       <Anecdote anecdotes={anecdotes} selected={selected} votes={votes} />
       <div>
         <Button handleClick={voteSelected} text='vote' />
         <Button handleClick={selectNext} text='next anecdote' />
       </div>
+      <h1>Anecdote with Most Votes</h1>
+      <Anecdote anecdotes={anecdotes} selected={chosen} votes={votes} />
     </div>
   )
 }
