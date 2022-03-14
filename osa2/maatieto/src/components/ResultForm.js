@@ -1,7 +1,7 @@
 import CountryInfo from './CountryInfo'
 import CountryList from './CountryList'
 
-const ResultForm = ({countries, filter}) => {
+const ResultForm = ({ countries, filter, selected, setSelected }) => {
   const filterUpperCase = filter.toLocaleUpperCase()
   const matches = countries.filter(
     c => c.name.common.toLocaleUpperCase().includes(filterUpperCase))
@@ -10,8 +10,17 @@ const ResultForm = ({countries, filter}) => {
       <div>Too many matches, specify another filter</div>
     )
   } else if (matches.length > 1) {
+    const selectedCountry = selected === null
+      ? null : countries.find(c => c.cca3 === selected)
     return (
-      <CountryList countries={matches} />
+      <>
+        <CountryList
+          countries={matches}
+          selected={selected}
+          setSelected={setSelected} />
+        {selectedCountry === null ? (<></>) :
+          <CountryInfo country={selectedCountry} />}
+      </>
     )
   } else if (matches.length === 1) {
     return (

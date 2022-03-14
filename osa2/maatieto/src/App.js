@@ -6,9 +6,15 @@ import ResultForm from "./components/ResultForm"
 const App = () => {
   const [filter, setFilter] = useState('')
   const [countries, setCountries] = useState([])
+  const [selected, setSelected] = useState(null)
 
   const handleFilterChange = () => {
     console.log('Filter set to', filter)
+  }
+
+  const filterEdited = (newValue) => {
+    setSelected(null)
+    setFilter(newValue)
   }
 
   useEffect(() => {
@@ -19,18 +25,19 @@ const App = () => {
         console.log(`Received ${response.data.length} countries`)
       })
   }, [])
-
   return (
     <div>
       <h1>Maatieto</h1>
       <FilterForm
         inputLabel='Find countries'
         filter={filter}
-        setFilter={setFilter}
+        setFilter={filterEdited}
         handleFilterChange={handleFilterChange} />
       <ResultForm
         countries={countries}
-        filter={filter} />
+        filter={filter}
+        selected={selected}
+        setSelected={setSelected} />
     </div>
   )
 }
