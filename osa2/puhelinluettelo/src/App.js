@@ -47,6 +47,15 @@ const App = () => {
     }
   }
 
+  const removePerson = (person) => {
+    if (window.confirm(`Do you really want to remove ${person.name}?`)) {
+      personService.remove(person.id)
+      .then(() => {
+        setPersons(persons.filter(p => p.id !== person.id))
+      })
+    }
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -65,7 +74,8 @@ const App = () => {
       <h3>Numbers</h3>
       <Persons
         persons={persons}
-        filter={filter} />
+        filter={filter}
+        remove={removePerson} />
     </div>
   )
 

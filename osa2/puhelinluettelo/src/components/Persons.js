@@ -1,4 +1,4 @@
-const Persons = ({ persons, filter }) => {
+const Persons = ({ persons, filter, remove }) => {
   const shownPersons = filter === ''
     ? persons
     : persons.filter(p => p.name.toLocaleUpperCase()
@@ -6,7 +6,11 @@ const Persons = ({ persons, filter }) => {
 
   return (
     <div>
-      {shownPersons.map(p => <div key={p.id}>{p.name} {p.number}</div>)}
+      {shownPersons.map(p =>
+        <div key={p.id}>
+          {p.name} {p.number}
+          <button onClick={() => remove(p)}>Remove</button>
+        </div>)}
     </div>
   )
 }
