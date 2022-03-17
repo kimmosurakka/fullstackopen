@@ -1,0 +1,17 @@
+.notification {
+    background-color: aquamarine;
+    border: 1px dotted darkgreen;
+    border-radius: 1ex;
+    padding: 1ex;
+    color: darkgreen;
+    margin-bottom: 1em;
+}
+
+.error {
+    background-color: pink;
+    border: 1px dotted darkred;
+    border-radius: 1ex;
+    padding: 1ex;
+    color: darkred;
+    margin-bottom: 1em;
+}
