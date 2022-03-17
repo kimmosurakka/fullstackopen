@@ -5,7 +5,6 @@ const WeatherInfo = ({ city }) => {
     const [weather, setWeather] = useState(null)
 
     useEffect(()=>{
-      // const apiKey = '2af3378ef9c9647292a3705d948aa3a4'
       const apiKey = process.env.REACT_APP_API_KEY
       if (!apiKey) {
           window.alert('REACT_APP_API_KEY not set!')
