@@ -31,8 +31,9 @@ const App = () => {
 
   const addName = (event) => {
     event.preventDefault()
-    if (persons.find(p => p.name === newName) !== undefined) {
-      window.alert(`${newName} is already added to the phonebook`)
+    const oldPerson = persons.find(p => p.name === newName)
+    if (oldPerson !== undefined) {
+      updatePerson({ ...oldPerson, number: newNumber })
     } else {
       const newPerson = {
         name: newName,
@@ -41,9 +42,9 @@ const App = () => {
       personService.add(newPerson)
       .then(addedPerson => {
         setPersons(persons.concat(addedPerson))
-      })
-      setNewName('')
-      setNewNumber('')
+        setNewName('')
+        setNewNumber('')
+        })
     }
   }
 
@@ -56,6 +57,18 @@ const App = () => {
     }
   }
 
+  const updatePerson = (person) => {
+    const question = `${person.name} is already in the phonebook. Do you
+      want to replace the number with ${person.number}?`
+    if (window.confirm(question)) {
+      personService.update(person.id, person)
+      .then(changedPerson => {
+        setPersons(persons.map(p => p.id === person.id ? changedPerson : p))
+        setNewName('')
+        setNewNumber('')  
+      })
+    }
+  }
   return (
     <div>
       <h2>Phonebook</h2>
