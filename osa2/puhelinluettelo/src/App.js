@@ -11,6 +11,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
   const [notification, setNotification] = useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     personService.getAll()
@@ -34,6 +35,11 @@ const App = () => {
   const showNotification = (text) => {
     setNotification(text)
     setTimeout(() => setNotification(null), 1200)
+  }
+
+  const showError = (text) => {
+    setError(text)
+    setTimeout(() => setError(null), 1200)
   }
 
   const addName = (event) => {
@@ -63,6 +69,10 @@ const App = () => {
         setPersons(persons.filter(p => p.id !== person.id))
         showNotification(`Removed ${person.name}`)
       })
+      .catch(reason => {
+        showError(`Information for ${person.name} was already removed`)
+        setPersons(persons.filter(p => p.id !== person.id))
+      })
     }
   }
 
@@ -73,15 +83,21 @@ const App = () => {
       personService.update(person.id, person)
       .then(changedPerson => {
         setPersons(persons.map(p => p.id === person.id ? changedPerson : p))
-        setNewName('')
-        setNewNumber('')
         showNotification(`${changedPerson.name} was updated`)
       })
+      .catch(reason => {
+        showError(`Information for ${person.name} was already removed`)
+        setPersons(persons.filter(p => p.id !== person.id))
+      })
+      setNewName('')
+      setNewNumber('')
     }
   }
+
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={error} isError={true} />
       <Notification message={notification}/>
       <FilterForm
         filter={filter}
