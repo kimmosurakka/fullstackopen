@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseUrl = 'http://localhost:3001/persons'
+const baseUrl = '/api/persons'
 
 const getAll = () => {
   return axios
@@ -24,4 +24,6 @@ const update = (personId, newContent) => {
     .put(`${baseUrl}/${personId}`, newContent)
     .then(response => response.data)
 }
-export default {getAll, add, remove, update}
+
+const personService = {getAll, add, remove, update}
+export default personService
