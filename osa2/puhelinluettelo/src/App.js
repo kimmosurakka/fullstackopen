@@ -39,7 +39,7 @@ const App = () => {
 
   const showError = (text) => {
     setError(text)
-    setTimeout(() => setError(null), 1200)
+    setTimeout(() => setError(null), 2400)
   }
 
   const addName = (event) => {
@@ -59,6 +59,10 @@ const App = () => {
         setNewNumber('')
         showNotification(`Added ${addedPerson.name}`)
         })
+      .catch(error => {
+        console.error(error.response.data)
+        showError(error.response.data.error)
+      })
     }
   }
 
