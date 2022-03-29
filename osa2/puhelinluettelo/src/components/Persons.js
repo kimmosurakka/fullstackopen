@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 const Persons = ({ persons, filter, remove }) => {
   const shownPersons = filter === ''
     ? persons
@@ -13,6 +15,12 @@ const Persons = ({ persons, filter, remove }) => {
         </div>)}
     </div>
   )
+}
+
+Persons.propTypes = {
+  persons: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filter: PropTypes.string.isRequired,
+  remove: PropTypes.func.isRequired
 }
 
 export default Persons

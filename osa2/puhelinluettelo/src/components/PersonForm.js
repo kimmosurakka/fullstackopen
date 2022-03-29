@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 const PersonForm = ({
   newName,
   handleNameChange,
@@ -18,6 +20,14 @@ const PersonForm = ({
       <button type="submit">add</button>
     </div>
   </form>
+}
+
+PersonForm.propTypes = {
+  newName: PropTypes.string.isRequired,
+  handleNameChange: PropTypes.func.isRequired,
+  newNumber: PropTypes.string.isRequired,
+  handleNumberChange: PropTypes.func.isRequired,
+  addName: PropTypes.func.isRequired
 }
 
 export default PersonForm

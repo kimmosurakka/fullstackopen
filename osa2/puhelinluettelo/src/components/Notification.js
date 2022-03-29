@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 const Notification = ({ message, isError }) => {
   if (message === null) {
     return null
@@ -9,4 +11,8 @@ const Notification = ({ message, isError }) => {
   )
 }
 
+Notification.propTypes = {
+  message: PropTypes.string,
+  isError: PropTypes.bool.isRequired
+}
 export default Notification

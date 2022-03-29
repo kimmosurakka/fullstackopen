@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from 'axios'
 
 const baseUrl = '/api/persons'
 
@@ -25,5 +25,5 @@ const update = (personId, newContent) => {
     .then(response => response.data)
 }
 
-const personService = {getAll, add, remove, update}
+const personService = { getAll, add, remove, update }
 export default personService
